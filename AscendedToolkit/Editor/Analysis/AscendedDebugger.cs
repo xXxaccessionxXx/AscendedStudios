@@ -174,12 +174,8 @@ public class AscendedDebugger : EditorWindow
     // UPDATED METHOD TO HANDLE COMPILER ERRORS
     private void DrawCodePreview(LogInfo log)
     {
-        // 1. Try to find Runtime Error (Standard Stack Trace)
-        // Format: Assets/Script.cs:10
         var match = Regex.Match(log.stackTrace, @"(Assets[\\/].*\.cs):(\d+)");
 
-        // 2. If failed, try to find Compiler Error (Inside Message)
-        // Format: Assets\Script.cs(10,20)
         if (!match.Success)
         {
             match = Regex.Match(log.message, @"(Assets[\\/].*\.cs)\((\d+),");
@@ -227,4 +223,5 @@ public class AscendedDebugger : EditorWindow
             GUILayout.Label("Could not pinpoint source file path.", EditorStyles.centeredGreyMiniLabel);
         }
     }
+
 }
